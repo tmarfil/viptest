@@ -127,7 +127,7 @@ First run:
 time unbuffer ./viptest.py --csv testfile.csv -c 10 > >(tee logfile1.log) 2>errors1.log
 ```
 
-Second run (after some change in the environment):
+Next run (after some change in the environment):
 
 ```sh
 time unbuffer ./viptest.py --csv testfile.csv -c 10 > >(tee logfile2.log) 2>errors2.log
