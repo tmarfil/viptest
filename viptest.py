@@ -21,9 +21,9 @@ from datetime import datetime
 # False: Use HTTP/1.1 for HTTPS requests.
 USE_HTTP2 = True
 
-# IGNORE_CERTIFICATE_WARNINGS: A boolean flag to ignore SSL certificate warnings.
-# True: SSL certificate warnings will be ignored. Like bypassing a browser's invalid TLS certificate warning.
-# False: SSL certificate warnings will not be ignored, and SSL verification will be enforced.
+# IGNORE_CERTIFICATE_WARNINGS: A boolean flag to ignore TLS certificate warnings.
+# True: TLS certificate warnings will be ignored. Like bypassing a browser's invalid TLS certificate warning.
+# False: TLS certificate warnings will not be ignored, and SSL verification will be enforced.
 IGNORE_CERTIFICATE_WARNINGS = True
 
 # MAX_CONCURRENCY: An integer specifying the maximum number of concurrent processes.
