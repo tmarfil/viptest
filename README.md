@@ -89,9 +89,9 @@ Run the script with the following command:
 - `-c 10`: Specifies the number of concurrent processes.
 - `--csv testfile.csv`: Specifies the CSV file to use.
 
-### Testing the Application
+### Testing the Applications
 
-The repository includes a `testfile.csv` to run the initial test of the application. This can be tested with:
+The repository includes a `testfile.csv` to run tests against an example list of applications. This can be tested with:
 
 ```sh
 time unbuffer ./viptest.py --csv testfile.csv -c 50 > >(tee logfile1.log) 2>errors1.log
@@ -108,6 +108,16 @@ time unbuffer ./viptest.py --csv testfile.csv -c 50 > >(tee logfile1.log) 2>erro
 ##### What's in logfile1.log?
 
 `logfile1.log` contains the standard output of the script execution, which includes the results of the URL processing tests.
+
+To quickly report on virtual servers that are not healthy:
+
+```sh
+cat logfile1.log | grep Error
+```
+
+Example output:
+
+`[https://www.python.org] Error processing https://www.python.org: timed out`
 
 ### Running Two Tests
 
