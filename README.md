@@ -114,7 +114,7 @@ Install the required Python packages using the `requirements.txt` file hosted in
 2. **Install the requirements**:
 
     ```sh
-    pip install -r requirements.txt
+    pip3 install -r requirements.txt
     ```
 
 ## Running viptest.py
