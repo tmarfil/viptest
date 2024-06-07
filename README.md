@@ -15,7 +15,7 @@ If Python 3.8.x or later is installed, the output should be something like:
 ```
 Python 3.8.10
 ```
-## Install Complementary Linux Packages
+## Installing Complementary Linux Packages
 
 VIPTest is Linux only. To install the complementary packages (time, diff, sort, tee):
   
