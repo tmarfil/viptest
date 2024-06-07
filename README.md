@@ -15,6 +15,21 @@ If Python 3.8.x or later is installed, the output should be something like:
 ```
 Python 3.8.10
 ```
+## Install Complementary Linux Packages
+
+VIPTest is Linux only. To install the complementary packages (time, diff, sort, tee):
+  
+  - ### Red Hat-based Systems (e.g., RHEL, CentOS, Fedora):
+    ```bash
+    sudo yum install time diffutils coreutils
+    ```
+
+  - ### Debian-based Systems (e.g., Debian, Ubuntu):
+    ```bash
+    sudo apt-get install time diffutils coreutils
+    ```
+
+The `coreutils` package includes `tee` and `sort` commands.
 
 ## Creating a Python Virtual Environment
 
@@ -26,17 +41,9 @@ Python 3.8.10
 
 2. **Activate the virtual environment**:
 
-    - On macOS/Linux:
-
-      ```sh
-      source myenv/bin/activate
-      ```
-
-    - On Windows:
-
-      ```sh
-      .\myenv\Scripts\activate
-      ```
+    ```sh
+    source myenv/bin/activate
+    ```
 
 3. **Confirm the Python version inside the virtual environment**:
 
@@ -105,7 +112,7 @@ time unbuffer ./viptest.py --csv testfile.csv -c 50 > >(tee logfile1.log) 2>erro
 - `> >(tee logfile1.log)`: Redirects standard output to `logfile1.log` while also printing it to the terminal.
 - `2>errors1.log`: Redirects standard error to `errors1.log`.
 
-##### What's in logfile1.log?
+##### Logfile Contents
 
 `logfile1.log` contains the standard output of the script execution, which includes the results of the URL processing tests.
 
@@ -207,6 +214,10 @@ http://testsite.com,
 5. **http://testsite.com,**
    - **Behavior**: The program will perform an HTTP GET request to `http://testsite.com` and report the response code. The port defaults to 80 for HTTP if none is specified.
    - **IP Override**: No IP address is provided, so the program will use system DNS to resolve the FQDN.
+
+6. **https://example.com/path/to/resource, 192.168.1.1**
+   - **Behavior**: The program will report on the TLS version and ciphers and the response code from an HTTPS GET request to `https://example.com/path/to/resource`. The port defaults to 443 for HTTPS if none is specified.
+   - **IP Override**: If `NAME_RESOLUTION_OVERRIDE = True`, the FQDN `example.com` will resolve to the IP address `192.168.1.1` for the test.
 
 ## Program Behavior Based on `NAME_RESOLUTION_OVERRIDE`
 
