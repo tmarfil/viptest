@@ -100,17 +100,6 @@ The `coreutils` package includes `tee` and `sort` commands.
 
     This should output the Python version being used in the virtual environment, e.g., `Python 3.8.10`.
 
-    > **Note: Exiting a Python Virtual Environment**
-    >
-    > To exit a Python virtual environment, simply run the `deactivate` command. This will deactivate the virtual environment and return you to your normal shell.
-    >
-    > ```sh
-    > deactivate
-    > ```
-    >
-    > Once you run this command, your shell prompt should no longer show the name of the virtual environment, indicating that you have successfully exited it.
-
-
 ## Installing Requirements
 
 Install the required Python packages using the `requirements.txt` file hosted in the git repository.
@@ -229,6 +218,18 @@ The following variables can be adjusted within the `viptest.py` script:
 - **IGNORE_CERTIFICATE_WARNINGS**: Determines whether to ignore SSL certificate warnings.
 - **MAX_CONCURRENCY**: Sets the maximum number of concurrent processes.
 - **NAME_RESOLUTION_OVERRIDE**: Decides whether to use the IP address provided in the CSV file to override the system DNS resolution.
+
+## Exiting a Python Virtual Environment
+
+  > **Note: Exiting a Python Virtual Environment**
+  >
+  > To exit a Python virtual environment, simply run the `deactivate` command. This will deactivate the virtual environment and return you to your normal shell.
+  >
+  > ```sh
+  > deactivate
+  > ```
+  >
+  > Once you run this command, your shell prompt should no longer show the name of the virtual environment, indicating that you have successfully exited it.
 
 # VIPTest CSV File Creation and Program Behavior
 
