@@ -100,6 +100,17 @@ The `coreutils` package includes `tee` and `sort` commands.
 
     This should output the Python version being used in the virtual environment, e.g., `Python 3.8.10`.
 
+    > **Note: Exiting a Python Virtual Environment**
+    >
+    > To exit a Python virtual environment, simply run the `deactivate` command. This will deactivate the virtual environment and return you to your normal shell.
+    >
+    > ```sh
+    > deactivate
+    > ```
+    >
+    > Once you run this command, your shell prompt should no longer show the name of the virtual environment, indicating that you have successfully exited it.
+
+
 ## Installing Requirements
 
 Install the required Python packages using the `requirements.txt` file hosted in the git repository.
@@ -124,7 +135,7 @@ Install the required Python packages using the `requirements.txt` file hosted in
 Ensure `viptest.py` is executable. You can either add it to your `$PATH` or call it directly. To make it executable:
 
 ```sh
-chmod +x viptest.py
+sudo chmod +x viptest.py
 ```
 
 ### Usage of viptest.py
