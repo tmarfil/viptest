@@ -15,18 +15,65 @@ If Python 3.8.x or later is installed, the output should be something like:
 ```
 Python 3.8.10
 ```
+
+## Installing Python3-venv and Pip3
+
+- ### Red Hat-based Systems (e.g., RHEL, CentOS, Fedora):
+  
+  Enable the EPEL repository
+  
+  ```bash
+  sudo yum install epel-release
+  ```
+  Update the package list
+  
+  ```bash
+  sudo yum update
+  ```
+  Install python3-venv
+  
+  ```bash
+  sudo yum install python3-venv
+  ```
+
+  Install pip3
+  
+  ```bash
+  sudo yum install python3-pip
+  ```
+
+- ### Debian-based Systems (e.g., Debian, Ubuntu):
+  
+  Update the package list
+  
+  ```bash
+  sudo apt update
+  ```
+ 
+  Install python3-venv
+  
+  ```bash
+  sudo apt install python3-venv
+  ```
+  
+  Install pip3
+  
+  ```bash
+  sudo apt install python3-pip
+  ```
+  
 ## Installing Complementary Linux Packages
 
-VIPTest is Linux only. To install the complementary packages (time, diff, sort, tee):
+VIPTest is Linux only. To install the complementary packages (time, diff, sort, tee, expect):
   
   - ### Red Hat-based Systems (e.g., RHEL, CentOS, Fedora):
     ```bash
-    sudo yum install time diffutils coreutils
+    sudo yum install time diffutils coreutils expect
     ```
 
   - ### Debian-based Systems (e.g., Debian, Ubuntu):
     ```bash
-    sudo apt-get install time diffutils coreutils
+    sudo apt-get install time diffutils coreutils expect
     ```
 
 The `coreutils` package includes `tee` and `sort` commands.
