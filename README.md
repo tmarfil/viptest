@@ -48,7 +48,7 @@ The `coreutils` package includes `tee` and `sort` commands.
 3. **Confirm the Python version inside the virtual environment**:
 
     ```sh
-    python --version
+    python3 --version
     ```
 
     This should output the Python version being used in the virtual environment, e.g., `Python 3.8.10`.
