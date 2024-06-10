@@ -70,7 +70,7 @@ VIPTest is Linux only. To install the complementary packages (time, diff, sort, 
   
   - ### Red Hat-based Systems (e.g., RHEL, CentOS, Fedora):
     ```bash
-    sudo yum install time diffutils coreutils expect
+    sudo dnf install time diffutils coreutils expect
     ```
 
   - ### Debian-based Systems (e.g., Debian, Ubuntu):
