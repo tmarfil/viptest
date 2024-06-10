@@ -20,26 +20,28 @@ Python 3.8.10
 
 - ### Red Hat-based Systems (e.g., RHEL, CentOS, Fedora):
   
-  Enable the EPEL repository
-  
-  ```bash
-  sudo yum install epel-release
-  ```
   Update the package list
   
   ```bash
-  sudo yum update
+  sudo dnf update
   ```
-  Install python3-venv
+
+  Enable the CodeReady Builder repository
   
   ```bash
-  sudo yum install python3-venv
+  sudo dnf config-manager --set-enabled crb
+  ```
+
+  Install python3-virtualenv
+  
+  ```bash
+  sudo dnf install python3-virtualenv
   ```
 
   Install pip3
   
   ```bash
-  sudo yum install python3-pip
+  sudo dnf install python3-pip
   ```
 
 - ### Debian-based Systems (e.g., Debian, Ubuntu):
