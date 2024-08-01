@@ -2,7 +2,7 @@
 
 ## The Motivation Behind VIPTest
 
-As an F5 Solutions Architect, I noticed a recurring challenge with prospective customers: there was no quick way to "grade" the success of migrating from their current environment to F5 solutions. This gap made it difficult to quickly identify and address problem areas. To solve this, I developed VIPTest - a tool designed as a convenience for anyone considering moving their applications from a different vendor solution (e.g., Citrix NetScaler) to F5.
+As an F5 Solutions Architect, I noticed a recurring challenge with prospective customers: there was no quick way to "grade" the success of migrating from their current environment to F5 solutions. This gap made it difficult to quickly identify and address problem areas. To solve this, I developed [VIPTest](https://github.com/tmarfil/viptest) - a tool designed as a convenience for anyone considering moving their applications from a different vendor solution (e.g., Citrix NetScaler) to F5.
 
 However, VIPTest's utility extends far beyond migration scenarios. It can be used in any environment where you introduce a change and need an automated process to assess the success of these changes. Whether you're upgrading software, modifying configurations, or performing routine maintenance, VIPTest provides a rapid, comprehensive snapshot of your application landscape.
 
