@@ -142,7 +142,7 @@ The multiprocessing module is crucial for VIPTest's performance. Here's how it w
 2. Each chunk is processed by a separate Python process.
 3. Results are collected in a shared queue.
 
-This approach allows VIPTest to test thousands of URLs in minutes instead of hours. The code implements this using:
+This approach allows VIPTest to test thousands of URLs in minutes instead of hours. The Python code implements this using:
 
 ```python
 if args.concurrent:
