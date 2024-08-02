@@ -24,9 +24,10 @@ Customers often lack a quick, automated way to assess the impact of environment 
 
 1. Fast, concurrent testing of multiple URLs
 2. Pre and post-change comparisons
-3. Detection of improvements (e.g., TLS upgrades, HTTP/1 to HTTP/2 upgrades) and issues (e.g., broken connectivity)
-4. Identification of deprecated applications
+3. Detection of improvements (e.g., TLS upgrades, HTTP/1.1 to HTTP/2 upgrades) and issues (e.g., broken connectivity)
+4. Identification of deprecated applications so you don't wast time testing 'dead' URLs
 5. Rapid assessment when migrating from another vendor's solution, such as Citrix NetScaler
+6. A simple mechanism to target _just_ a staging environment during testing by overriding system DNS with static IP entries
 
 Let's explore how VIPTest works and how you can leverage it in your F5 environment.
 
@@ -39,6 +40,7 @@ VIPTest, available on [GitHub](https://github.com/tmarfil/viptest), accepts a CS
 3. Checks TLS versions and ciphers
 4. Tests connectivity (ping and telnet)
 5. Reports results for easy comparison
+
 
 ## Key Features
 
@@ -56,6 +58,8 @@ VIPTest, available on [GitHub](https://github.com/tmarfil/viptest), accepts a CS
    - Connectivity status
 
 ## Setting Up VIPTest
+
+See [README.md](https://github.com/tmarfil/viptest/tree/main) for full installation and useage details.
 
 1. Ensure you have Python 3.8+ installed:
 
