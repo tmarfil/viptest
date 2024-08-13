@@ -136,12 +136,12 @@ sudo chmod +x viptest.py
 Run the script with the following command:
 
 ```sh
-./viptest.py -c 10 --csv testfile.csv
+viptest.py -c 10 --csv testfile.csv
 ```
 
 #### Explanation
 
-- `./viptest.py`: Executes the script.
+- `viptest.py`: Executes the script.
 - `-c 10`: Specifies the number of concurrent processes.
 - `--csv testfile.csv`: Specifies the CSV file to use.
 
@@ -150,14 +150,14 @@ Run the script with the following command:
 The repository includes a `testfile.csv` to run tests against an example list of applications. This can be tested with:
 
 ```sh
-time unbuffer ./viptest.py --csv testfile.csv -c 50 > >(tee logfile1.log) 2>errors1.log
+time unbuffer viptest.py --csv testfile.csv -c 50 > >(tee logfile1.log) 2>errors1.log
 ```
 
 #### Explanation
 
 - `time`: Measures the time taken to execute the command.
 - `unbuffer`: Ensures that the output is not buffered, providing real-time output.
-- `./viptest.py --csv testfile.csv -c 50`: Executes the script with the specified CSV file and concurrency level.
+- `viptest.py --csv testfile.csv -c 50`: Executes the script with the specified CSV file and concurrency level.
 - `> >(tee logfile1.log)`: Redirects standard output to `logfile1.log` while also printing it to the terminal.
 - `2>errors1.log`: Redirects standard error to `errors1.log`.
 
@@ -180,13 +180,13 @@ Example output:
 First run:
 
 ```sh
-time unbuffer ./viptest.py --csv testfile.csv -c 10 > >(tee logfile1.log) 2>errors1.log
+time unbuffer viptest.py --csv testfile.csv -c 10 > >(tee logfile1.log) 2>errors1.log
 ```
 
 Next run (after some change in the environment):
 
 ```sh
-time unbuffer ./viptest.py --csv testfile.csv -c 10 > >(tee logfile2.log) 2>errors2.log
+time unbuffer viptest.py --csv testfile.csv -c 10 > >(tee logfile2.log) 2>errors2.log
 ```
 
 ### Comparing the Outputs
