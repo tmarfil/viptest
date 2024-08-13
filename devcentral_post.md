@@ -44,7 +44,7 @@ VIPTest, available on [GitHub](https://github.com/tmarfil/viptest), accepts a CS
 
 ## Key Features
 
-1. **Concurrent Processing**: VIPTest uses Python's multiprocessing module to test as many URLs simultaneously as your client machine can support. On a modest Intel 10th gen / 6 Core / 12 thread laptop, it can test 1000 URLs in less than one minute.
+1. **Concurrent Processing**: VIPTest uses Python's multiprocessing module to test as many URLs simultaneously as your client machine can support. On my modest Intel 10th gen / 6 Core laptop, I can test 1000 URLs in less than one minute.
 
 2. **Flexible URL Handling**: It supports various URL formats, including:
    - Full URLs (http://example.com)
@@ -127,7 +127,7 @@ See [README.md](https://github.com/tmarfil/viptest/tree/main) for full installat
 
 ## The Power of httpx
 
-VIPTest leverages the httpx library, offering several advantages:
+VIPTest leverages the Python httpx library:
 
 1. HTTP/2 Support: Enables testing of modern application stacks.
 2. Automatic Retries: Improves reliability in unstable network conditions.
@@ -136,13 +136,13 @@ VIPTest leverages the httpx library, offering several advantages:
 
 ## Concurrent Testing with Multiprocessing
 
-The multiprocessing module is crucial for VIPTest's performance. Here's how it works:
+The Python multiprocessing module is crucial for VIPTest's performance. Here's how it works:
 
 1. The URL list is divided into chunks.
 2. Each chunk is processed by a separate Python process.
 3. Results are collected in a shared queue.
 
-This approach allows VIPTest to test thousands of URLs in minutes instead of hours. The Python code implements this using:
+This approach allows VIPTest to one thousand URLs in leass than one minute. The Python code implements this using:
 
 ```python
 if args.concurrent:
