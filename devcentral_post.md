@@ -100,7 +100,7 @@ See [README.md](https://github.com/tmarfil/viptest/tree/main) for full installat
 2. Run VIPTest:
 
    ```
-   ./viptest.py --csv your_file.csv -c 50
+   viptest.py --csv your_file.csv -c 50
    ```
 
    This tests URLs concurrently using 50 processes.
@@ -108,7 +108,7 @@ See [README.md](https://github.com/tmarfil/viptest/tree/main) for full installat
 3. Save the output:
 
    ```
-   ./viptest.py --csv your_file.csv -c 50 > pre_change_results.log
+   viptest.py --csv your_file.csv -c 50 > pre_change_results.log
    ```
 
 4. Make your environment changes.
@@ -116,7 +116,7 @@ See [README.md](https://github.com/tmarfil/viptest/tree/main) for full installat
 5. Run VIPTest again:
 
    ```
-   ./viptest.py --csv your_file.csv -c 50 > post_change_results.log
+   viptest.py --csv your_file.csv -c 50 > post_change_results.log
    ```
 
 6. Compare results:
@@ -183,7 +183,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run VIPTest
       run: |
-        ./viptest.py --csv testfile.csv -c 50 > test_results.log
+        viptest.py --csv testfile.csv -c 50 > test_results.log
     - name: Upload results
       uses: actions/upload-artifact@v2
       with:
@@ -204,7 +204,7 @@ viptest:
   image: python:3.8
   script:
     - pip install -r requirements.txt
-    - ./viptest.py --csv testfile.csv -c 50 > test_results.log
+    - viptest.py --csv testfile.csv -c 50 > test_results.log
   artifacts:
     paths:
       - test_results.log
