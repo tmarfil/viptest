@@ -14,7 +14,7 @@ Before we dive into VIPTest, let's briefly explore F5's three new families of Ap
 
 2. [BIG-IP Next](https://www.f5.com/products/big-ip-services/big-ip-next): The next generation of F5's flagship product, offering advanced traffic management, security, and analytics in a more flexible, software-first architecture.
 
-3. [NGINX](https://www.nginx.com/): A suite of technologies for API management, load balancing, and application delivery, known for its high performance and scalability.
+3. [NGINX](https://www.nginx.com/): A suite of cloud native technologies that provide API gateway, reverse proxy, and application security, known for its high performance and scalability.
 
 With VIPTest, you can confidently introduce changes to any of these solutions and quickly assess their impact. It's equally valuable for evaluating initial migrations and for ongoing operational changes within the same solution.
 
