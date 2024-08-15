@@ -125,9 +125,9 @@ See [README.md](https://github.com/tmarfil/viptest/tree/main) for full installat
    diff pre_change_results.log post_change_results.log
    ```
 
-## The Power of httpx
+## The Power of HTTPX
 
-VIPTest leverages the Python httpx library:
+VIPTest leverages the [HTTPX client for Python3[(https://www.python-httpx.org/):
 
 1. HTTP/2 Support: Enables testing of modern application stacks.
 2. Automatic Retries: Improves reliability in unstable network conditions.
@@ -136,7 +136,7 @@ VIPTest leverages the Python httpx library:
 
 ## Concurrent Testing with Multiprocessing
 
-The Python multiprocessing module is crucial for VIPTest's performance. Here's how it works:
+The [Python multiprocessing package](https://docs.python.org/3/library/multiprocessing.html) is crucial for VIPTest's performance. Here's how it works:
 
 1. The URL list is divided into chunks.
 2. Each chunk is processed by a separate Python process.
