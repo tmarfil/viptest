@@ -127,7 +127,7 @@ See [README.md](https://github.com/tmarfil/viptest/tree/main) for full installat
 
 ## The Power of HTTPX
 
-VIPTest leverages the [HTTPX client for Python3[(https://www.python-httpx.org/):
+VIPTest leverages the [HTTPX client for Python3](https://www.python-httpx.org/):
 
 1. HTTP/2 Support: Enables testing of modern application stacks.
 2. Automatic Retries: Improves reliability in unstable network conditions.
