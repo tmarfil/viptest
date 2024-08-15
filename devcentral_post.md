@@ -176,7 +176,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8'
+        python-version: '3.11'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -201,7 +201,7 @@ stages:
 
 viptest:
   stage: test
-  image: python:3.8
+  image: python:3.11
   script:
     - pip install -r requirements.txt
     - viptest.py --csv testfile.csv -c 50 > test_results.log
