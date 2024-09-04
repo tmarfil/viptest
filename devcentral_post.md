@@ -57,6 +57,8 @@ VIPTest, available on [GitHub](https://github.com/tmarfil/viptest), accepts a CS
    - IP resolution
    - Connectivity status
 
+VIPTest works with Linux, Windows ([WSL2](https://learn.microsoft.com/en-us/windows/wsl/install)), or MacOS ([Zsh using homebrew](https://brew.sh)).
+
 ## Setting Up VIPTest
 
 See [README.md](https://github.com/tmarfil/viptest/tree/main) for full installation and useage details.
@@ -142,7 +144,7 @@ The [Python multiprocessing package](https://docs.python.org/3/library/multiproc
 2. Each chunk is processed by a separate Python process.
 3. Results are collected in a shared queue.
 
-This approach allows VIPTest to one thousand URLs in leass than one minute. The Python code implements this using:
+This approach allows VIPTest to test one thousand URLs in less than one minute. The Python code implements this using:
 
 ```python
 if args.concurrent:
@@ -176,7 +178,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.11'
+        python-version: '3.12'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -201,7 +203,7 @@ stages:
 
 viptest:
   stage: test
-  image: python:3.11
+  image: python:3.12
   script:
     - pip install -r requirements.txt
     - viptest.py --csv testfile.csv -c 50 > test_results.log
