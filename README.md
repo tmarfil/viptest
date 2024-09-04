@@ -18,6 +18,8 @@ Python 3.8.10
 
 ## Installing Python3-venv and Pip3
 
+Although the documented instructions are for Linux, VIPTest also works on Windows ([WSL2](https://learn.microsoft.com/en-us/windows/wsl/install)), and MacOS ([Zsh using homebrew](https://brew.sh)).
+
 - ### Red Hat-based Systems (e.g., RHEL, CentOS, Fedora):
   
   Update the package list
