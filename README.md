@@ -68,7 +68,7 @@ Although the documented instructions are for Linux, VIPTest also works on Window
   
 ## Installing Complementary Linux Packages
 
-VIPTest is Linux only. To install the complementary packages (time, diff, sort, tee, expect):
+To install the complementary packages (time, diff, sort, tee, expect):
   
   - ### Red Hat-based Systems (e.g., RHEL, CentOS, Fedora):
     ```bash
