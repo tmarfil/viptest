@@ -57,7 +57,7 @@ VIPTest, available on [GitHub](https://github.com/tmarfil/viptest), accepts a CS
    - IP resolution
    - Connectivity status
 
-VIPTest works with Linux, Windows ([WSL2](https://learn.microsoft.com/en-us/windows/wsl/install)), or MacOS ([Zsh using homebrew](https://brew.sh)).
+VIPTest works with Linux, Windows ([WSL2](https://learn.microsoft.com/en-us/windows/wsl/install)), and MacOS ([Zsh using homebrew](https://brew.sh)).
 
 ## Setting Up VIPTest
 
