@@ -36,6 +36,7 @@ MAX_CONCURRENCY = 50
 # False: Ignore the IP address in the CSV file and use system DNS resolution.
 NAME_RESOLUTION_OVERRIDE = True
 
+
 def is_valid_fqdn(fqdn):
     """
     Check if the given FQDN (Fully Qualified Domain Name) is valid.
@@ -46,7 +47,7 @@ def is_valid_fqdn(fqdn):
     Returns:
         bool: True if the FQDN is valid, False otherwise.
     """
-    labels = fqdn.split('.')
+    labels = fqdn.split(".")
     if len(fqdn) > 253:
         return False
     for label in labels:
@@ -55,9 +56,10 @@ def is_valid_fqdn(fqdn):
         if not (label[0].isalnum() and label[-1].isalnum()):
             return False
         for char in label:
-            if not (char.isalnum() or char == '-'):
+            if not (char.isalnum() or char == "-"):
                 return False
     return True
+
 
 def validate_url(url):
     """
@@ -73,7 +75,7 @@ def validate_url(url):
         url = url.strip()
         result = urlparse(url)
         scheme = result.scheme
-        if scheme not in ['http', 'https', '']:
+        if scheme not in ["http", "https", ""]:
             return False, f"Invalid scheme: {scheme}"
 
         if not result.hostname:
@@ -90,6 +92,7 @@ def validate_url(url):
     except Exception as e:
         return False, str(e)
 
+
 def validate_ip(ip):
     """
     Validate the given IP address.
@@ -105,6 +108,7 @@ def validate_ip(ip):
         return True
     except ValueError:
         return False
+
 
 def get_tls_info(hostname, ip, port):
     """
@@ -129,6 +133,7 @@ def get_tls_info(hostname, ip, port):
             cipher = ssock.cipher()
             return tls_version, cipher
 
+
 def telnet_test(ip, port):
     """
     Perform a Telnet test to the given IP address and port.
@@ -146,6 +151,7 @@ def telnet_test(ip, port):
     except socket.error:
         return f"Telnet {ip}:{port} - Port is not open"
 
+
 def ping_test(ip):
     """
     Perform a ping test to the given IP address.
@@ -158,13 +164,16 @@ def ping_test(ip):
     """
     try:
         # Use system ping command
-        output = subprocess.run(["ping", "-c", "1", ip], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        output = subprocess.run(
+            ["ping", "-c", "1", ip], stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
         if output.returncode == 0:
             return True
         else:
             return False
     except Exception as e:
         return False
+
 
 def process_urls(urls, output_queue, counter):
     """
@@ -188,7 +197,7 @@ def process_urls(urls, output_queue, counter):
             continue
 
         # Split entry on ':'
-        parts = url.split(':')
+        parts = url.split(":")
         if len(parts) == 2 and parts[1].isdigit():
             hostname = parts[0]
             port = int(parts[1])
@@ -203,14 +212,20 @@ def process_urls(urls, output_queue, counter):
                 try:
                     resolved_ip = socket.gethostbyname(hostname)
                 except socket.gaierror:
-                    output_queue.put(f"[{url}] Error: Could not resolve hostname {hostname}")
+                    output_queue.put(
+                        f"[{url}] Error: Could not resolve hostname {hostname}"
+                    )
                     continue
 
             # Accumulate results
             results = [f"[{url}]"]
 
             # Ping test
-            ping_result = f"Ping {resolved_ip} - Host is reachable" if ping_test(resolved_ip) else f"Ping {resolved_ip} - Host is not reachable"
+            ping_result = (
+                f"Ping {resolved_ip} - Host is reachable"
+                if ping_test(resolved_ip)
+                else f"Ping {resolved_ip} - Host is not reachable"
+            )
             results.append(ping_result)
 
             # Telnet test
@@ -230,7 +245,11 @@ def process_urls(urls, output_queue, counter):
             try:
                 parsed_url = urlparse(url)
                 scheme = parsed_url.scheme
-                port = parsed_url.port if parsed_url.port else (443 if scheme == 'https' else 80)
+                port = (
+                    parsed_url.port
+                    if parsed_url.port
+                    else (443 if scheme == "https" else 80)
+                )
                 hostname = parsed_url.hostname
 
                 resolved_ip = ip if ip and NAME_RESOLUTION_OVERRIDE else None
@@ -238,21 +257,31 @@ def process_urls(urls, output_queue, counter):
                     try:
                         resolved_ip = socket.gethostbyname(hostname)
                     except socket.gaierror:
-                        output_queue.put(f"[{url}] Error: Could not resolve hostname {hostname}")
+                        output_queue.put(
+                            f"[{url}] Error: Could not resolve hostname {hostname}"
+                        )
                         continue
 
-                if scheme == 'http':
+                if scheme == "http":
                     try:
                         response = httpx.get(url, timeout=10)
-                        output_queue.put(f"[{url}] HTTP GET {url} - Resolved IP: {resolved_ip} - Response Code: {response.status_code}")
+                        output_queue.put(
+                            f"[{url}] HTTP GET {url} - Resolved IP: {resolved_ip} - Response Code: {response.status_code}"
+                        )
                     except httpx.RequestError as e:
                         output_queue.put(f"[{url}] Error processing {url}: {e}")
-                elif scheme == 'https':
+                elif scheme == "https":
                     try:
                         tls_version, cipher = get_tls_info(hostname, resolved_ip, port)
-                        with httpx.Client(http2=USE_HTTP2, verify=not IGNORE_CERTIFICATE_WARNINGS, timeout=10) as client:
+                        with httpx.Client(
+                            http2=USE_HTTP2,
+                            verify=not IGNORE_CERTIFICATE_WARNINGS,
+                            timeout=10,
+                        ) as client:
                             response = client.get(url)
-                            output_queue.put(f"[{url}] HTTPS GET {url} - Resolved IP: {resolved_ip} - TLS Version: {tls_version}, Cipher: {cipher}, Response Code: {response.status_code}")
+                            output_queue.put(
+                                f"[{url}] HTTPS GET {url} - Resolved IP: {resolved_ip} - TLS Version: {tls_version}, Cipher: {cipher}, Response Code: {response.status_code}"
+                            )
                     except Exception as e:
                         output_queue.put(f"[{url}] Error processing {url}: {e}")
             except Exception as e:
@@ -260,6 +289,7 @@ def process_urls(urls, output_queue, counter):
 
         # Increment the counter
         counter.value += 1
+
 
 def chunked_iterable(iterable, size):
     """
@@ -279,34 +309,42 @@ def chunked_iterable(iterable, size):
             break
         yield chunk
 
+
 def main():
     """
     Main function to test URLs from a CSV file.
     """
     global USE_HTTP2, IGNORE_CERTIFICATE_WARNINGS, NAME_RESOLUTION_OVERRIDE
 
-    parser = argparse.ArgumentParser(description='Test URLs from a CSV file.')
-    parser.add_argument('--csv', type=str, required=True, help='CSV file with URLs')
-    parser.add_argument('-c', '--concurrent', type=int, help='Number of concurrent processes')
+    parser = argparse.ArgumentParser(description="Test URLs from a CSV file.")
+    parser.add_argument("--csv", type=str, required=True, help="CSV file with URLs")
+    parser.add_argument(
+        "-c", "--concurrent", type=int, help="Number of concurrent processes"
+    )
     args = parser.parse_args()
 
     if args.concurrent and args.concurrent > MAX_CONCURRENCY:
-        print(f"Error: Maximum concurrency of {MAX_CONCURRENCY} exceeded.", file=sys.stderr)
+        print(
+            f"Error: Maximum concurrency of {MAX_CONCURRENCY} exceeded.",
+            file=sys.stderr,
+        )
         sys.exit(1)
 
-    with open(args.csv, newline='') as csvfile:
+    with open(args.csv, newline="") as csvfile:
         reader = csv.reader(csvfile)
         urls = [row for row in reader]
 
     output_queue = multiprocessing.Queue()
-    counter = multiprocessing.Value('i', 0)
+    counter = multiprocessing.Value("i", 0)
 
     if args.concurrent:
         chunk_size = len(urls) // args.concurrent
         chunks = list(chunked_iterable(urls, chunk_size))
         processes = []
         for chunk in chunks:
-            p = multiprocessing.Process(target=process_urls, args=(chunk, output_queue, counter))
+            p = multiprocessing.Process(
+                target=process_urls, args=(chunk, output_queue, counter)
+            )
             processes.append(p)
             p.start()
 
@@ -325,10 +363,10 @@ def main():
         sys.stdout.flush()
 
     # Print timestamp and number of processed URLs
-    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(f"Processed {counter.value} URLs at {timestamp}")
     sys.stdout.flush()
 
+
 if __name__ == "__main__":
     main()
-
