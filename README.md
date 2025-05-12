@@ -292,6 +292,95 @@ http://testsite.com,
 
 By following these guidelines, you can create a CSV file that is compatible with the `viptest.py` script and understand how the program will behave based on the entries and configuration.
 
+## How is the CSV file ingested?
+
+The CSV file is ingested in the `main()` function using Python's built-in `csv` module:
+
+```python
+with open(args.csv, newline="") as csvfile:
+    reader = csv.reader(csvfile)
+    urls = [row for row in reader]
+```
+
+This code:
+1. Opens the CSV file specified by the `--csv` command-line argument
+2. Creates a CSV reader object
+3. Reads all rows from the CSV into a list called `urls`
+4. Each row in the CSV becomes a sublist in the `urls` list
+
+The CSV is expected to contain URLs in the first column and optional IP addresses in the second column.
+
+## What are 'chunks'?
+
+Chunks are subsets of the input data (URLs from the CSV) that get distributed across multiple processes for parallel processing. The function `chunked_iterable()` splits the list of URLs into smaller groups:
+
+```python
+def chunked_iterable(iterable, size):
+    it = iter(iterable)
+    while True:
+        chunk = list(islice(it, size))
+        if not chunk:
+            break
+        yield chunk
+```
+
+This function:
+1. Takes an iterable (the list of URLs) and a chunk size
+2. Uses `islice()` to extract portions of the iterable of the specified size
+3. Yields each chunk as a list
+4. Stops when no more items are left
+
+## How are these chunks processed by the multiprocessor module?
+
+The chunks are processed by the multiprocessing module in the `main()` function when the `--concurrent` flag is used:
+
+1. The program calculates how many URLs should be in each chunk:
+   ```python
+   chunk_size = len(urls) // args.concurrent
+   ```
+
+2. It divides the URLs into chunks:
+   ```python
+   chunks = list(chunked_iterable(urls, chunk_size))
+   ```
+
+3. For each chunk, it creates a separate process:
+   ```python
+   for chunk in chunks:
+       p = multiprocessing.Process(
+           target=process_urls, args=(chunk, output_queue, counter)
+       )
+       processes.append(p)
+       p.start()
+   ```
+
+4. Each process runs the `process_urls()` function on its chunk in parallel
+   
+5. An output queue is used for inter-process communication:
+   ```python
+   output_queue = multiprocessing.Queue()
+   ```
+
+6. A shared counter tracks the number of processed URLs:
+   ```python
+   counter = multiprocessing.Value("i", 0)
+   ```
+
+7. The main process collects results from the queue and prints them:
+   ```python
+   while any(p.is_alive() for p in processes) or not output_queue.empty():
+       while not output_queue.empty():
+           print(output_queue.get())
+   ```
+
+8. Finally, it waits for all processes to complete:
+   ```python
+   for p in processes:
+       p.join()
+   ```
+
+The multiprocessing approach allows the script to process multiple URLs simultaneously, significantly improving efficiency for large CSV files, especially when connectivity testing is involved.
+
 ## Contributing
 
 We welcome contributions to the VIPTest project. Please follow these steps to contribute:
